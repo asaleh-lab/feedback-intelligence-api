@@ -19,7 +19,7 @@ class TestSentimentAnalyzer(unittest.TestCase):
             "SENT_NEGATIVE",
         )
         self.assertEqual(
-            sentiment_analyzer("Average experience")["label"],
+            sentiment_analyzer("Okay I guess")["label"],
             "SENT_NEUTRAL",
         )
 
