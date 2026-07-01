@@ -1,34 +1,39 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="./static/mywebscript.js"></script>
-    <style>
-        .center-heading {
-            text-align: center;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="card">
-        <div class="card-body">
-            <h1 class="center-heading">Feedback Intelligence — Sentiment Analysis</h1>
-            <p class="text-muted center-heading">Most businesses already have AI-ready data sitting in reviews.</p>
-            <div style="padding: 25px 25px 25px 25px;">
-            <h2 class="mb-3">
-                <label class="form-label">Please enter the text to be analyzed</label>
-                <textarea class="form-control" id="textToAnalyze" rows="4"></textarea>
-            </h2>
+    <main class="container">
+        <h1>Sentiment Analysis</h1>
+        <p class="subtitle">Paste customer feedback and submit to see the result.</p>
 
-            <div style="padding: 25px 25px 25px 25px;">
-                <button onclick="RunSentimentAnalysis()" class="btn btn-secondary">Run Sentiment Analysis</button>
-            </div>
-            <div style="padding: 25px 25px 25px 25px;"></div>
-            <h2 class="mb-3">
-                <label class="form-label">Result of Sentiment Analysis</label>
-            </h2>
+        <form method="post">
+            <label for="textToAnalyze">Feedback</label>
+            <textarea
+                id="textToAnalyze"
+                name="textToAnalyze"
+                rows="5"
+                placeholder="Example: The product works great, but shipping was slow."
+            >{{ text }}</textarea>
 
-            <div id="system_response" style="padding: 25px 25px 25px 25px;"></div>
-        </div>
-    </div>
+            <button type="submit">Analyze</button>
+        </form>
+
+        {% if result %}
+        <section class="result">
+            <p class="result-heading">Result</p>
+            <p class="sentiment sentiment-{{ result.sentiment.lower() }}">{{ result.sentiment }}</p>
+            <p class="confidence">{{ result.confidence }}% confidence</p>
+        </section>
+        {% endif %}
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </main>
 </body>
 </html>
