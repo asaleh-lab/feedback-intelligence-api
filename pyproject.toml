@@ -1,0 +1,21 @@
+[project]
+name = "feedback-intelligence-api"
+version = "0.1.0"
+description = "Flask API for sentiment analysis with DistilBERT"
+requires-python = ">=3.12"
+
+[tool.pylint.main]
+py-version = "3.12"
+ignore-paths = ["^\\.venv"]
+
+[tool.pylint.format]
+max-line-length = 88
+
+[tool.pylint.design]
+max-args = 7
+max-locals = 20
+max-branches = 15
+max-statements = 50
+
+[tool.pylint.similarities]
+min-similarity-lines = 6

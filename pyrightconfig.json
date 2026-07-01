@@ -1,0 +1,16 @@
+{
+  "include": ["."],
+  "exclude": [".venv", "**/__pycache__", "**/.pytest_cache"],
+  "venvPath": ".",
+  "venv": ".venv",
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "basic",
+  "reportCallIssue": "none",
+  "reportArgumentType": "none",
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "reportUnusedImport": true,
+  "reportUnusedVariable": true,
+  "reportDuplicateImport": true,
+  "reportUntypedFunctionDecorator": false
+}
