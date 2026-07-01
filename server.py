@@ -8,38 +8,35 @@ app = Flask("Sentiment Analyzer")
 
 
 def _format_label(label):
-    """Turn SENT_POSITIVE into POSITIVE for the web UI."""
-    if label and label.startswith("SENT_"):
-        return label.replace("SENT_", "", 1)
-    return label
+    """Turn positive into Positive for the web UI."""
+    return label.title() if label else label
 
 
-@app.route("/sentimentAnalyzer")
-def sent_analyzer():
-    """Analyze text from the query string and return label plus score."""
-    text_to_analyze = request.args.get("textToAnalyze")
-
-    if not text_to_analyze or not text_to_analyze.strip():
-        return "Invalid input ! Try again."
-
-    response = sentiment_analyzer(text_to_analyze)
-    label = response["label"]
-    score = response["score"]
-
-    if label is None:
-        return "Invalid input ! Try again."
-
-    display_label = _format_label(label)
-    return (
-        f"The given text has been identified as {display_label} "
-        f"with a score of {score}."
-    )
-
-
-@app.route("/")
-def render_index_page():
-    """Render the main application page."""
+@app.get("/")
+def index():
+    """Show the feedback form."""
     return render_template("index.html")
+
+
+@app.post("/")
+def analyze():
+    """Run sentiment analysis on submitted feedback."""
+    text = request.form.get("textToAnalyze", "").strip()
+    if not text:
+        return render_template(
+            "index.html",
+            error="Please enter some text to analyze.",
+        )
+
+    response = sentiment_analyzer(text)
+    return render_template(
+        "index.html",
+        text=text,
+        result={
+            "sentiment": _format_label(response["label"]),
+            "confidence": round(response["score"] * 100),
+        },
+    )
 
 
 if __name__ == "__main__":

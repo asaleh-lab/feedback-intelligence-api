@@ -12,15 +12,15 @@ class TestSentimentAnalyzer(unittest.TestCase):
         """Positive, negative, and neutral text return expected labels."""
         self.assertEqual(
             sentiment_analyzer("I love working with Python")["label"],
-            "SENT_POSITIVE",
+            "positive",
         )
         self.assertEqual(
             sentiment_analyzer("I hate working with Python")["label"],
-            "SENT_NEGATIVE",
+            "negative",
         )
         self.assertEqual(
             sentiment_analyzer("Okay I guess")["label"],
-            "SENT_NEUTRAL",
+            "neutral",
         )
 
 

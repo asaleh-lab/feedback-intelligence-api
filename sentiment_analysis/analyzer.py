@@ -30,25 +30,24 @@ def _map_label(by_label):
     neutral_score = by_label.get("neutral", 0.0)
 
     if neutral_score > 0:
-        best_label = "SENT_NEUTRAL"
-        best_score = neutral_score
-        if positive_score > best_score:
-            best_label = "SENT_POSITIVE"
-            best_score = positive_score
-        if negative_score > best_score:
-            best_label = "SENT_NEGATIVE"
-            best_score = negative_score
-        return {"label": best_label, "score": best_score}
+        scores = {
+            "neutral": neutral_score,
+            "positive": positive_score,
+            "negative": negative_score,
+        }
+
+        best_label = max(scores, key=scores.get)
+        return {"label": best_label, "score": scores[best_label]}
 
     margin = abs(positive_score - negative_score)
     if margin < MARGIN_THRESHOLD:
         return {
-            "label": "SENT_NEUTRAL",
+            "label": "neutral",
             "score": max(positive_score, negative_score),
         }
     if positive_score > negative_score:
-        return {"label": "SENT_POSITIVE", "score": positive_score}
-    return {"label": "SENT_NEGATIVE", "score": negative_score}
+        return {"label": "positive", "score": positive_score}
+    return {"label": "negative", "score": negative_score}
 
 
 def sentiment_analyzer(text_to_analyse):
