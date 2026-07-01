@@ -1,0 +1,65 @@
+# --- Local-only docs and assets ---
+sentiment-analysis.pdf
+BLOG_DRAFT.md
+LEARN_PYTHON.md
+# --- Secrets and local config (never commit) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets.json
+*.secret
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+.eggs/
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+
+# --- Test, lint, and type-check caches ---
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- ML model caches (if stored in-repo) ---
+.cache/
+models/
+
+# --- Logs and local databases ---
+*.log
+*.sqlite
+*.sqlite3
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# --- Editors (local IDE config) ---
+.cursor/
+.githooks/
+.idea/
+*.swp
+*.swo
+*~
